@@ -1,0 +1,108 @@
+﻿@model IEnumerable<DB.Models.Proizvodi>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Creat", "Proizvodi", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table" id="proizvod">
+    <tr>
+        <th>
+            Naziv
+        </th>
+        <th>
+            Šifra
+        </th>
+        <th>
+            Cijena
+        </th>
+        <th>
+            Vrsta
+        </th>
+        <th>
+            Mjera u jedinicama
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Naziv
+            </td>
+            <td>
+                @item.Sifra
+            </td>
+            <td>
+                @item.Cijena
+            </td>
+            <td>
+                @item.VrsteProizvoda.Naziv
+            </td>
+            <td>
+                @item.JediniceMjere.Naziv
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProizvodID }) |
+                @Html.ActionLink("Delete", "Delete", "Proizvodi", new { id = item.ProizvodID }, null)
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.ActionLink("Stvori narudzbu", "CreatNarudzba", "Narudzba", null ,new { @class = "btn btn-primary" })
+
+<!--
+<h1>Narudzba</h1>
+<ul id="narudzba"></ul>
+<button id="save" class="btn btn-primary">Dodaj narudzbu</button>
+
+@section scripts{
+
+    <script>
+
+        $(document).ready(function () {
+
+            var data = {
+                KupacId: 1,
+                ProizvodiId: []
+            };
+
+            $("#proizvod button").on("click", function () {
+                var button = $(this);
+                console.log(button.val());
+                data.ProizvodiId.push(button.val());
+                $("#narudzba").append("<li class='list-group-item'>" + button.attr("data-name") + "</li>");
+                console.log(data);
+            });
+
+            var model = {
+                Id: 1,
+
+            }
+
+            $("#save").on("click", function () {
+                $.ajax({
+                    url: "Narudzba/CreatNarudzbaStavke",
+                    type: "POST",
+                    data: data,
+                    success: function () {
+                        console.log("sucess");
+                    }
+                });
+
+            });
+
+        });
+
+    </script>
+
+}
+    -->

@@ -1,0 +1,47 @@
+﻿@model DB.ViewModels.ProizvodAddVM
+@{
+    ViewBag.Title = "Creat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Creat</h2>
+
+@using (@Html.BeginForm("Save", "Proizvodi"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Naziv)
+        @Html.TextBoxFor(m => m.Naziv, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Naziv)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Sifra)
+        @Html.TextBoxFor(m => m.Sifra, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Sifra)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Cijena)
+        @Html.TextBoxFor(m => m.Cijena, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Cijena)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.VrstaID)
+        @Html.DropDownListFor(m => m.VrstaID, new SelectList(Model.VrsteProizvodas, "VrstaID", "Naziv"), "Izaberite Vrstu", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.VrstaID)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.JedinicaMjereID)
+        @Html.DropDownListFor(m => m.JedinicaMjereID, new SelectList(Model.JediniceMjeres, "JediniceMjereID", "Naziv"), "Izaberite jedinicu", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.JedinicaMjereID)
+    </div>
+
+    @Html.HiddenFor(i => i.ProizvodID)
+
+    <button type="submit" class="btn btn-primary">Save</button>
+
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+}

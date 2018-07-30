@@ -1,0 +1,46 @@
+﻿@model DB.Models.Narudzbe
+
+@{
+    ViewBag.Title = "IspisNarudbe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>IspisNarudbe</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Narudzba
+        </th>
+        <th>
+           Proizvod
+        </th>
+        <th>
+           Kolicina
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.NarudzbaStavkes) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Narudzbe.NarudzbeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Proizvodi.Naziv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kolicina)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.NarudzbaStavkaID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.NarudzbaStavkaID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.NarudzbaStavkaID })
+        </td>
+    </tr>
+}
+
+</table>

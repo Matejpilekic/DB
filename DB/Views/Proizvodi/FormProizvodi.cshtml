@@ -1,0 +1,57 @@
+﻿@model DB.ViewModels.ProizvodAddVM
+@{
+    ViewBag.Title = "FormProizvodi";
+}
+
+<h2>New Customer</h2>
+
+@using (@Html.BeginForm("Save", "Proizvodi"))
+{
+    <div class="from-group">
+        @Html.LabelFor(m => m.Proizvodi.Naziv)
+        @Html.TextBoxFor(m => m.Proizvodi.Naziv, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Proizvodi.Naziv)
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(m => m.Proizvodi.Sifra)
+        @Html.TextBoxFor(m => m.Proizvodi.Sifra, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Proizvodi.Sifra)
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(m => m.Proizvodi.Cijena)
+        @Html.TextBoxFor(m => m.Proizvodi.Cijena, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Proizvodi.Cijena)
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(m => m.Proizvodi.Slika)
+        @Html.TextBoxFor(m => m.Proizvodi.Slika, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Proizvodi.Slika)
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(m => m.Proizvodi.SlikaThumb)
+        @Html.TextBoxFor(m => m.Proizvodi.SlikaThumb, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Proizvodi.SlikaThumb)
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(m => m.Proizvodi.JedinicaMjereID)
+        @Html.DropDownListFor(m => m.Proizvodi.JedinicaMjereID, new SelectList(Model.JediniceMjeres, "JediniceMjereID", "Naziv"), "Odaberi jedinicu mjere", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Proizvodi.JedinicaMjereID)
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(m => m.Proizvodi.VrstaID)
+        @Html.DropDownListFor(m => m.Proizvodi.VrstaID, new SelectList(Model.VrsteProizvodas, "VrstaID", "Naziv"), "Odaberi vrstu proizvoda", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Proizvodi.VrstaID)
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.Proizvodi.Status) Status
+        </label>
+    </div>
+    @Html.HiddenFor(m => m.Proizvodi.ProizvodID)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+}

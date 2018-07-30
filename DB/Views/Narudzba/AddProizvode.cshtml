@@ -1,0 +1,54 @@
+﻿@model DB.ViewModels.AddNarudzbe
+@{
+    ViewBag.Title = "AddProizvode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CreatNarudzba</h2>
+
+<table class="table" id="proizvod">
+    <tr>
+        <th>
+            Naziv
+        </th>
+        <th>
+            Šifra
+        </th>
+        <th>
+            Cijena
+        </th>
+        <th>
+            Vrsta
+        </th>
+        <th>
+            Mjera u jedinicama
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Proizvodi)
+    {
+        <tr>
+            <td>
+                @item.Naziv
+            </td>
+            <td>
+                @item.Sifra
+            </td>
+            <td>
+                @item.Cijena
+            </td>
+            <td>
+                @item.VrsteProizvoda.Naziv
+            </td>
+            <td>
+                @item.JediniceMjere.Naziv
+            </td>
+            <td>
+                @Html.ActionLink("Dodaj", "AddNarudzbaStavka","Narudzba", new { idN = Model.Narudzba.NarudzbeID , idP = item.ProizvodID }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.ActionLink("Spremi", "UpdateNarudzba","Narudzba", new { id = Model.Narudzba.NarudzbeID } , new { @class = "btn btn-primary" })
