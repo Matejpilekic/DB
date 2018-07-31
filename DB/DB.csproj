@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -56,6 +59,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -153,10 +160,14 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\MappingProfile.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DobavljaciController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NarudzbaController.cs" />
     <Compile Include="Controllers\ProizvodiController.cs" />
+    <Compile Include="Controllers\SkladistaController.cs" />
+    <Compile Include="Controllers\UlaziController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -204,9 +215,11 @@
     <Compile Include="Models\VrsteProizvoda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AddNarudzbe.cs" />
+    <Compile Include="ViewModels\DobavljacVm.cs" />
     <Compile Include="ViewModels\NarudzbaVm.cs" />
     <Compile Include="ViewModels\ProizvodAddVM.cs" />
     <Compile Include="ViewModels\ProizvodVm.cs" />
+    <Compile Include="ViewModels\SkladisteVm.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -251,11 +264,17 @@
     <Content Include="Views\Proizvodi\Creat.cshtml" />
     <Content Include="Views\Proizvodi\FormProizvodi.cshtml" />
     <Content Include="Views\Narudzba\AddProizvode.cshtml" />
-    <Content Include="Views\Narudzba\IspisNarudbe.cshtml" />
+    <Content Include="Views\Narudzba\NarudzbaStavka.cshtml" />
+    <Content Include="Views\Narudzba\Narudzbe.cshtml" />
+    <Content Include="Views\Narudzba\NarudzbaDetails.cshtml" />
+    <Content Include="Views\Skladista\CreatSkladiste.cshtml" />
+    <Content Include="Views\Skladista\Skladista.cshtml" />
+    <Content Include="Views\Dobavljaci\CreatDobavljac.cshtml" />
+    <Content Include="Views\Dobavljaci\GetAllDobavljace.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Narudzbe\" />
+    <Folder Include="Views\Ulazi\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

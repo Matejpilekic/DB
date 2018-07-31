@@ -1,0 +1,84 @@
+﻿@model IEnumerable<DB.ViewModels.DobavljacVm>
+
+@{
+    ViewBag.Title = "GetAllDobavljace";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GetAllDobavljace</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreatFormDobavljac", "Dobavljaci",null,new { @class ="btn btn-primary"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KontaktOsoba)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Web)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZiroRacun)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Napomena)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Naziv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KontaktOsoba)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Web)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZiroRacun)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Napomena)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "UpdateDobavljac","Dobavljaci",new { id=item.DobavljacId } , null) 
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "UpdateStatus","Dobavljaci",new { id=item.DobavljacId } , null) 
+        </td>
+    </tr>
+}
+
+</table>

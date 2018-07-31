@@ -1,0 +1,60 @@
+﻿@model IEnumerable<DB.ViewModels.NarudzbaVm>
+
+@{
+    ViewBag.Title = "Narudzbe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Narudzbe</h2>
+
+<p>
+    @Html.ActionLink("Stvori narudzbu", "CreatNarudzba", "Narudzba", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Broj narudzbe
+        </th>
+        <th>
+            Kupac
+        </th>
+        <th>
+            Datum
+        </th>
+        <th>
+            Aktivnost
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.BrojNarudzbe
+        </td>
+        <td>
+            @item.Kupci.Ime
+        </td>
+        <td>
+            @item.Datum
+        </td>
+        @if (item.Otkazano == null)
+        {
+            <td>
+                Narudzba aktivna
+            </td>
+        }
+        else
+        {
+            <td>
+                Narudzba otkazana
+            </td>
+        }
+
+        <td>
+            @Html.ActionLink("Details", "GetNarudzba","Narudzba", new { id = item.NarudzbeID },null) 
+        </td>
+    </tr>
+}
+
+</table>

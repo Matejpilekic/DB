@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DB.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,5 +14,8 @@ namespace DB.ViewModels
         public DateTime Datum { get; set; }
         public bool Status { get; set; }
         public DateTime? Otkazano { get; set; }
+
+        public Kupci Kupci { get; set; }
+        //public ICollection<NarudzbaStavke> NarudzbaStavkes { get; set; }
     }
 }

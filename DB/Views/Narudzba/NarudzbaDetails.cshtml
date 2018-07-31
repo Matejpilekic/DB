@@ -1,0 +1,34 @@
+﻿@model IEnumerable<DB.Models.NarudzbaStavke>
+
+@{
+    ViewBag.Title = "NarudzbaDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>NarudzbaDetails</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Proizvodi.Naziv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kolicina)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Proizvodi.Naziv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kolicina)
+        </td>
+        
+    </tr>
+}
+
+</table>

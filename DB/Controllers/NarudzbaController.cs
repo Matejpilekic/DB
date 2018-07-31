@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DB.Models;
 using DB.ViewModels;
 using System.Data.Entity;
+using AutoMapper;
 
 namespace DB.Controllers
 {
@@ -22,46 +23,8 @@ namespace DB.Controllers
         {
             return View();
         }
-        /*
-        [Route("Narudzba/CreatNarudzbaStavke")]
-        [HttpPost]
-        public ActionResult CreatNarudzbaStavke(AddNarudzbe model)
-        {
-            model.KupacId = 1;
-            var kupac = _context.Kupcis.SingleOrDefault(i => i.KupacID == model.KupacId);
-
-            if (kupac == null)
-            {
-                return HttpNotFound();
-            }
-
-            var proizvodi = _context.Proizvodis.Where(m => model.ProizvodiId.Contains(m.ProizvodID)).ToList();
-
-            if(proizvodi.Count == 0)
-            {
-                return RedirectToAction("Index", "Proizvodi");
-            }
-            else
-            {
-                int narudzbaid = CreatNarudzba(model.KupacId);
-
-                foreach (var proivod in proizvodi)
-                {
-                    NarudzbaStavke narudzbaStavka = new NarudzbaStavke
-                    {
-                        NarudzbaID = narudzbaid,
-                        ProizvodID = proivod.ProizvodID,
-                        Kolicina = 1
-                    };
-                    _context.NarudzbaStavkes.Add(narudzbaStavka);
-                }
-                _context.SaveChanges();
-
-                return RedirectToAction("Index", "Proizvodi");
-            }
-           
-            
-        } */
+        
+        [Route("Narudzba/CreatNarudzba")]
         [HttpGet]
         public ActionResult CreatNarudzba()
         {
@@ -87,18 +50,105 @@ namespace DB.Controllers
 
             narudzba.NarudzbeID = narudzbaDb.NarudzbeID;
 
-            
+            var proizvodVm = _context.Proizvodis.Include(j => j.JediniceMjere).Include(v => v.VrsteProizvoda).ToList().Select(Mapper.Map<Proizvodi,ProizvodVm>);
 
             var model = new AddNarudzbe
             {
                 Narudzba = narudzba,
-                Proizvodi= _context.Proizvodis.Include(j => j.JediniceMjere).Include(v => v.VrsteProizvoda).ToList()
+                Proizvodi= proizvodVm
 
             };
 
-            return View("AddProizvode",model);
+            return View("NarudzbaStavka", model);
         }
 
+        [Route("Narudzba/AddNarudzbaStavka")]
+        [HttpPost]
+        public ActionResult AddNarudzbaStavka(AddNarudzbe Vmodel)
+        {
+            NarudzbaStavke stavka = new NarudzbaStavke
+            {
+                NarudzbaID = Vmodel.Narudzba.NarudzbeID,
+                ProizvodID = Vmodel.ProizvodID,
+                Kolicina = Vmodel.Kolicina
+            };
+            _context.NarudzbaStavkes.Add(stavka);
+            _context.SaveChanges();
+
+            
+
+            var model = new AddNarudzbe
+            {
+                Narudzba = Vmodel.Narudzba,
+                Proizvodi = _context.Proizvodis.Include(j => j.JediniceMjere).Include(v => v.VrsteProizvoda).ToList().Select(Mapper.Map<Proizvodi, ProizvodVm>)
+
+        };
+
+            return View("NarudzbaStavka", model);
+        }
+
+        [Route("Narudzba/UpdateNarudzba/{id}")]
+        [HttpGet]
+        public ActionResult UpdateNarudzba(int id)
+        {
+            var narudzba = _context.Narudzbes.SingleOrDefault(i => i.NarudzbeID == id);
+
+            narudzba.Status = true;
+            _context.SaveChanges();
+
+
+
+            return RedirectToAction("Index", "Proizvodi");
+        }
+
+        [Route("narudzba/getAll")]
+        [HttpGet]
+        public ActionResult GetAllNarudzbe()
+        {
+            var narudzbe = _context.Narudzbes.Include(k => k.Kupci).Where(s => s.Status ==true).ToList().Select(Mapper.Map<Narudzbe, NarudzbaVm>); 
+
+            return View("Narudzbe",narudzbe);
+        }
+
+        [Route("narudzba/Details/{id}")]
+        [HttpGet]
+        public ActionResult GetNarudzba(int id)
+        {
+            var narudzba = _context.Narudzbes.SingleOrDefault(k => k.NarudzbeID== id);
+
+            if(narudzba== null || narudzba.Status == false)
+            {
+                return HttpNotFound();
+            }
+            var narudzbaStavke = _context.NarudzbaStavkes.Where(i => i.NarudzbaID == id).Include(p => p.Proizvodi).ToList();
+
+          
+            return View("NarudzbaDetails", narudzbaStavke);
+        }
+
+        [HttpGet]
+        public ActionResult OtkaziNarudzbu(int id)
+        {
+            var narudzba = _context.Narudzbes.SingleOrDefault(i => i.NarudzbeID == id);
+
+            if(narudzba == null || narudzba.Status==false)
+            {
+                return HttpNotFound();
+            }
+            narudzba.Otkazano = DateTime.Now;
+
+            _context.SaveChanges();
+
+            return Redirect("");
+
+        }
+
+
+
+
+
+
+        /*
         [Route("Narudzba/AddNarudzbaStavka/{idN}/{idP}")]
         [HttpGet]
         public ActionResult AddNarudzbaStavka(int idN, int idP)
@@ -116,7 +166,7 @@ namespace DB.Controllers
 
             NarudzbaVm narudzba = new NarudzbaVm
             {
-                NarudzbeID=narudzbaDb.NarudzbeID,
+                NarudzbeID = narudzbaDb.NarudzbeID,
                 BrojNarudzbe = narudzbaDb.BrojNarudzbe,
                 KupacID = narudzbaDb.KupacID,
                 Datum = narudzbaDb.Datum,
@@ -132,20 +182,6 @@ namespace DB.Controllers
             };
 
             return View("AddProizvode", model);
-        }
-
-        [Route("Narudzba/UpdateNarudzba/{id}")]
-        [HttpGet]
-        public ActionResult UpdateNarudzba(int id)
-        {
-            var narudzba = _context.Narudzbes.SingleOrDefault(i => i.NarudzbeID == id);
-
-            narudzba.Status = true;
-            _context.SaveChanges();
-
-
-
-            return RedirectToAction("Index", "Proizvodi");
-        }
+        }*/
     }
 }

@@ -1,0 +1,33 @@
+﻿@model DB.ViewModels.AddNarudzbe
+@{
+    /**/
+
+    ViewBag.Title = "NarudzbaStavka";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>NarudzbaStavka</h2>
+
+@using (@Html.BeginForm("AddNarudzbaStavka", "Narudzba"))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProizvodID)
+        @Html.DropDownListFor(m => m.ProizvodID, new SelectList(Model.Proizvodi, "ProizvodID", "Naziv"), "Izaberite Proizvod", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ProizvodID)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Kolicina)
+        @Html.TextBoxFor(m => m.Kolicina, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Kolicina)
+    </div>
+
+
+    @Html.HiddenFor(i => i.Narudzba.NarudzbeID)
+
+    <button type="submit" class="btn btn-primary">Save</button>
+
+}
+@Html.ActionLink("Spremi Narudzbu", "UpdateNarudzba", "Narudzba", new { id = Model.Narudzba.NarudzbeID }, new { @class = "btn btn-primary" })
