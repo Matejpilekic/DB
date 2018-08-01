@@ -179,6 +179,10 @@
     <Compile Include="Migrations\201807300655200_ProizvodiModelCijenaDouble.Designer.cs">
       <DependentUpon>201807300655200_ProizvodiModelCijenaDouble.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808010727549_DobavljacModelIznosRacunaToDouble.cs" />
+    <Compile Include="Migrations\201808010727549_DobavljacModelIznosRacunaToDouble.Designer.cs">
+      <DependentUpon>201808010727549_DobavljacModelIznosRacunaToDouble.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ConfigurationEntity\DobavljaciConfiguration.cs" />
     <Compile Include="Models\ConfigurationEntity\IzlaziConfiguration.cs" />
@@ -215,11 +219,13 @@
     <Compile Include="Models\VrsteProizvoda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AddNarudzbe.cs" />
+    <Compile Include="ViewModels\UlazStavkeVm.cs" />
     <Compile Include="ViewModels\DobavljacVm.cs" />
     <Compile Include="ViewModels\NarudzbaVm.cs" />
     <Compile Include="ViewModels\ProizvodAddVM.cs" />
     <Compile Include="ViewModels\ProizvodVm.cs" />
     <Compile Include="ViewModels\SkladisteVm.cs" />
+    <Compile Include="ViewModels\UlaziVm.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -271,10 +277,12 @@
     <Content Include="Views\Skladista\Skladista.cshtml" />
     <Content Include="Views\Dobavljaci\CreatDobavljac.cshtml" />
     <Content Include="Views\Dobavljaci\GetAllDobavljace.cshtml" />
+    <Content Include="Views\Ulazi\CreatUlazi.cshtml" />
+    <Content Include="Views\Ulazi\Ulazi.cshtml" />
+    <Content Include="Views\Ulazi\FormUlazStavke.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Ulazi\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -295,6 +303,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807300655200_ProizvodiModelCijenaDouble.resx">
       <DependentUpon>201807300655200_ProizvodiModelCijenaDouble.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808010727549_DobavljacModelIznosRacunaToDouble.resx">
+      <DependentUpon>201808010727549_DobavljacModelIznosRacunaToDouble.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

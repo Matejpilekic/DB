@@ -17,6 +17,7 @@ namespace DB.App_Start
             this.CreateMap<Narudzbe, NarudzbaVm>();
             this.CreateMap<Skladista, SkladisteVm>();
             this.CreateMap<Dobavljaci, DobavljacVm>();
+            this.CreateMap<Ulazi, UlaziVm>();
 
 
             // ViewModel to Domain
@@ -28,6 +29,8 @@ namespace DB.App_Start
                 .ForMember(c => c.SkladisteID, opt => opt.Ignore());
             this.CreateMap<DobavljacVm, Dobavljaci>()
                 .ForMember(c => c.DobavljacId, opt => opt.Ignore());
+            this.CreateMap<UlaziVm, Ulazi>()
+                .ForMember(c => c.UlaziID, opt => opt.Ignore());
         }
          
     }

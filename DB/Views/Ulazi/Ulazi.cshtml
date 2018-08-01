@@ -1,0 +1,74 @@
+﻿@model IEnumerable<DB.Models.Ulazi>
+
+@{
+    ViewBag.Title = "Ulazi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ulazi</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreatUlazi", "Ulazi");
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Dobavljac
+        </th>
+        <th>
+            Korisnik ime
+        </th>
+        <th>
+            Skladiste
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BrojFakture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Datum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IznosRacuna)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PDV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Napomena)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dobavljaci.Naziv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Korisnici.Ime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Skladista.Naziv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BrojFakture)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Datum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IznosRacuna)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PDV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Napomena)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "UpdateUlazi","Ulazi", new { id=item.UlaziID }, null) 
+        </td>
+    </tr>
+}
+
+</table>

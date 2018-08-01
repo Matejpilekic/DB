@@ -10,7 +10,7 @@ namespace DB.Models
         public int UlaziID { get; set; }
         public string BrojFakture { get; set; }
         public DateTime Datum { get; set; }
-        public float IznosRacuna { get; set; }
+        public double IznosRacuna { get; set; }
         public int PDV { get; set; }
         public string Napomena { get; set; }
         public int SkladisteID { get; set; }

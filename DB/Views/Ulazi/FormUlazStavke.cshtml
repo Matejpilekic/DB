@@ -1,0 +1,57 @@
+﻿@model DB.ViewModels.UlazStavkeVm
+
+@{
+    ViewBag.Title = "FormUlazStavke";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>FormUlazStavke</h2>
+
+@using (Html.BeginForm("AddUlazStavka", "Ulazi"))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>UlazStavke</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.UlazStavka.UlazID, "UlazID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.UlazStavka.UlazID, new SelectList(Model.Ulazi,"UlaziID","BrojFakture"), htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UlazStavka.UlazID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UlazStavka.ProizvodID, "ProizvodID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.UlazStavka.ProizvodID, new SelectList(Model.Proizvodi, "ProizvodID", "Naziv"), htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UlazStavka.ProizvodID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UlazStavka.Kolicina, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UlazStavka.Kolicina, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UlazStavka.Kolicina, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UlazStavka.Cijena, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UlazStavka.Cijena, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UlazStavka.Cijena, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+

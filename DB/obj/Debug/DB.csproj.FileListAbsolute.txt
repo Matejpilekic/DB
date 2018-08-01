@@ -202,3 +202,4 @@ C:\Users\Admin\source\repos\DB\DB\DB\bin\System.ValueTuple.dll
 C:\Users\Admin\source\repos\DB\DB\DB\bin\AutoMapper.pdb
 C:\Users\Admin\source\repos\DB\DB\DB\bin\AutoMapper.xml
 C:\Users\Admin\source\repos\DB\DB\DB\bin\System.ValueTuple.xml
+C:\Users\Admin\source\repos\DB\DB\DB\obj\Debug\DB.Migrations.DobavljacModelIznosRacunaToDouble.resources
